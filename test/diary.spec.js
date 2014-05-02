@@ -177,10 +177,18 @@ describe('Diary', () => {
       var start =  reporter.receive.calls.argsFor(0)[0];
       var end  =  reporter.receive.calls.argsFor(1)[0];
 
+      expect(start.start).toEqual(true);
+      expect(end.start).toBeUndefined();
       expect(end.endOf).toBeDefined()
       expect(end.endOf).toEqual(start.guid);
     });
 
+    it('the start log should annotate that it is indeed a start log', () => {
+      var done = logger.start.info('starting');
+      expect(reporter.receive).toHaveBeenCalledWith(jasmine.objectContaining({
+        start: true
+      }));
+    });
   });
   
 });

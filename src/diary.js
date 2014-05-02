@@ -27,6 +27,10 @@ Diary.prototype.log = function(level, group, message, endOf) {
     message.endOf = endOf;
   }
 
+  if (this.isTiming) {
+    message.start = true;
+  }
+
   Diary.reporters.forEach(function(target) {
 
     var config = target.config;
